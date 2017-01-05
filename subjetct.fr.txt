@@ -1,0 +1,23 @@
+Assignment name  : next
+Expected files   : next.c
+Allowed functions: atoi, printf
+--------------------------------------------------------------------------------
+
+Écrire un programme qui prend une suite de nombre en premier parametre et affiche sur la sortie standard l'element suivant de la suite suivit d'une newline.
+
+Chaque element de la suite ne depend que du precedant(sans puissance) d'une constante et des operations '*' '/'.
+
+Si il y a une erreur ou que les element ne peuvent pas se calculer de cette maniere, vous devez afficher "Error" sur la sortie standart suivie d'une newline.
+
+vous pouvez egalement trouver l'exercice suivant avec la commande grademe ;)
+
+Exemples :
+
+$> ./next "1 2 4 8" | cat -e
+16$
+$> ./next "1 1 1 -1" | cat -e
+Error$
+$> ./next "5 20 5 20 5" | cat -e
+Error$
+$> ./next 8 4 2 1 | cat -e
+0$
