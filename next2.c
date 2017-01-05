@@ -15,29 +15,7 @@ int		ft_check_div(int c, int q, int b)
 		return (1);
 	return (0);
 }
-/*
-int		ft_is_geom_mult(int b, int c, int i, char *str)
-{
-	if ((a != 0) && (c >= b) && (b >= a))
-	{
-		q = b / a;
-		while (b <= c && ft_check_mult(c, q, b))
-		{
-			b = c;
-			while ((str[i] >= '0') && (str[i] <= '9'))
-				i++;
-			if (str[i] == ' ')
-				c = atoi(str + i + 1);
-			if (str[i] == '\0')
-			{
-				printf("%d", c * q);
-				return ;
-			}
-			i++;
-		}
-	}
 
-}*/
 int	ft_parse_input(char *str)
 {
 	int cmp;
@@ -62,11 +40,27 @@ int	ft_parse_input(char *str)
 	return (1);
 }
 
+int		check_zeros(char *str, int i)
+{
+	while (str[i])
+	{
+		while ((str[i] >= '0') && (str[i] <= '9'))
+			i++;
+		if (str[i] == ' ')
+		{
+			if (atoi(str + i + 1) != 0)
+			return (0);
+		}
+		i++;
+	}
+	printf("0\n");
+	return (1);
+}
+
 void	ft_next(char *str)
 {
 	int a;
 	int b;
-	int c;
 	int	i;
 	int q;
 	
@@ -81,37 +75,39 @@ void	ft_next(char *str)
 		i++;
 	b = atoi(str + i + 1);
 	i++;
+	if (b == 0 && check_zeros(str, i))
+		return ;
 	if ((a != 0) && (b >= a))
 	{
 		q = b / a;
-		while (b <= c && ft_check_mult(c, q, b))
+		while (a <= b && ft_check_mult(b, q, a))
 		{
-			b = c;
+			a = b;
 			while ((str[i] >= '0') && (str[i] <= '9'))
 				i++;
 			if (str[i] == ' ')
-				c = atoi(str + i + 1);
+				b = atoi(str + i + 1);
 			if (str[i] == '\0')
 			{
-				printf("%d", c * q);
+				printf("%d\n", b * q);
 				return ;
 			}
 			i++;
 		}
 	}
-	if ((b != 0) && (c <= b) && (b <= a))
+	if ((b != 0) && (b <= a))
 	{
 		q = a / b;
-		while (c <= b && ft_check_div(c, q, b))
+		while (b <= a && ft_check_div(b, q, a))
 		{
-			b = c;
+			a = b;
 			while ((str[i] >= '0') && (str[i] <= '9'))
 				i++;
 			if (str[i] == ' ')
-				c = atoi(str + i + 1);
+				b = atoi(str + i + 1);
 			if (str[i] == '\0')
 			{
-				printf("%d", c / q);
+				printf("%d\n", b / q);
 				return ;
 			}
 			i++;
