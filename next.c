@@ -39,12 +39,14 @@ int	ft_parse_input(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (str[i] != ' ' && !(str[i] >= '0' && str[i] <= '9'))
+		if ((str[i] != ' ') && (str[i] != '-') && !(str[i] >= '0' && str[i] <= '9'))
 			return (0);
-		if (str[i] == ' ' && !(str[i + 1] >= '0' && str[i + 1] <= '9'))
+		if ((str[i] == ' ') && (str[i] != '-') && !((str[i + 1] >= '0') && (str[i + 1] <= '9')))
 			return (0);
-		else if (str[i] == ' ' && !(str[i] >= '0' && str[i] <= '9'))
+		else if (str[i] == ' ')
 			cmp++;
+		else if (str[i] == '-' && (!((str[i + 1] >= '0') && (str[i + 1] <= '9'))))
+			return (0);
 		i++;
 	}
 	if (cmp < 2)
@@ -76,7 +78,7 @@ void	ft_next(char *str)
 	int	i;
 	int q;
 	
-	if (!ft_parse_input(str))
+	if (!(ft_parse_input(str)))
 	{
 		printf("Error\n");
 		return ;
@@ -106,6 +108,7 @@ void	ft_next(char *str)
 			}
 			i++;
 		}
+		printf("Error\n");
 	}
 	if ((b != 0) && (b <= a))
 	{
@@ -132,5 +135,7 @@ int		main(int ac, char**av)
 {
 	if (ac == 2)
 		ft_next(av[1]);
+	else
+		printf("Error\n");
 	return(0);
-
+}
